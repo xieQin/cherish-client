@@ -4,7 +4,8 @@
   "description": "client check",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --quiet cherish-client.js",
+    "lint-warn": "eslint cherish-client.js"
   },
   "author": "xieq",
   "license": "MIT"

@@ -1,3 +1,5 @@
+exports = typeof window === 'undefined' ? global : window;
+
 var client = function () {
   //呈现引擎
   var engine = {
