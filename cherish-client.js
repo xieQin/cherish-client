@@ -131,6 +131,40 @@ var client = function () {
     }
   }
 
+  //移动设备
+  system.iphone = ua.indexOf("iPhone") > -1
+  system.ipod = ua.indexOf("iPod") > -1
+  system.ipad = ua.indexOf("iPad") > -1
+  system.nokiaN = ua.indexOf("NokiaN") > -1
+
+  //windows mobile
+  if (system.win == "CE") {
+    system.winMbile = system.win
+  } else if (system.win == "Ph") {
+    if (/Windows Phone OS (\d+.\d+)/.test(ua)) {
+      system.win = "Phone"
+      system.winMobile = parseFloat(RegExp(["$1"]))
+    }
+  }
+
+  //检测iOS版本
+  if (system.mac && ua.indexOf("Mobile") > -1) {
+    if(/CPU (?:iPhone )?OS (\d+\.\d+)/.test(ua)) {
+      system.ios = parseFloat(RegExp.$1.replace("_", "."))
+    } else {
+      system.ios = 2
+    }
+  }
+
+  //检测Android版本
+  if (/Android (\d+\.\d+)/.test(ua)) {
+    system.android = parseFloat(RegExp.$1)
+  }
+  //主机游戏系统
+  system.wii = ua.indexOf("Wii") > -1
+  system.ps = /playstation/i.test(ua)
+
+  //返回
   return {
     engine: engine,
     browser: browser,
