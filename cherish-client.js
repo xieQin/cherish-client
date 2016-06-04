@@ -92,6 +92,45 @@ var client = function () {
     engine.ie = browser.ie = parseFloat(engine.ver)
   }
 
+  //检测浏览器
+  browser.ie = engine.ie
+  browser.opera= engine.opera
+
+  //检测平台
+  var p = navigator.platform
+  system.win = p.indexOf("Win") == 0
+  system.mac = p.indexOf("Mac") == 0
+  system.x11 = (p == "X11") || (p.indexOf("Linux") == 0)
+
+  //检测Windows操作系统
+  if (system.win) {
+    if (/Win(?:dows)?([^do]{2})\s?(\d+\.\d+)?/.test(ua)) {
+      if (RegExp["$1"] == "NT") {
+        switch (RegExp["$2"]) {
+          case "5.0":
+            system.win = "2000"
+            break;
+          case "5.1":
+            system.win = "XP"
+            break;
+          case "6.0":
+            system.win = "Vista"
+            break;
+          case "6.1":
+            system.win = "7"
+            break;
+          default:
+            system.win = "NT"
+            break;
+        }
+      } else if (RegExp["$1"] == "9x") {
+        system.win = "ME"
+      } else {
+        system.win = RegExp["$1"]
+      }
+    }
+  }
+
   return {
     engine: engine,
     browser: browser,
